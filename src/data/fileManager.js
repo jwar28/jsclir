@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const filePath = './data/data.json'
+const filePath = './src/data/data.json'
 
 const saveFile = (data) => fs.writeFileSync(filePath, JSON.stringify(data))
 

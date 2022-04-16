@@ -1,4 +1,4 @@
-const { startMenu } = require('./helpers/menuBuilder')
+const { startMenu } = require('./src/helpers/menuBuilder')
 
 const main = async () => await startMenu()
 

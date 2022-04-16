@@ -1,6 +1,6 @@
 const { showMenu, pauseMenu, readUserInput } = require('./menuUtils')
-const TaskService = require('../services/taskService')
 const { saveIntoFile, getTasksInFile } = require('./dataUtils')
+const TaskService = require('../services/taskService')
 
 const menuActions = async (option, taskList) => {
   switch (option) {
@@ -11,7 +11,7 @@ const menuActions = async (option, taskList) => {
       break
 
     case '2':
-      console.log(getTasksInFile(taskList))
+      taskList.showAllTasks()
       break
   }
 }
@@ -19,6 +19,7 @@ const menuActions = async (option, taskList) => {
 const startMenu = async () => {
   console.clear()
   const taskList = new TaskService()
+  getTasksInFile(taskList)
   let option = ''
 
   do {
