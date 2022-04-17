@@ -8,9 +8,7 @@ class TaskService {
 
   get taskListArray () {
     const list = []
-    Object.keys(this.taskList).forEach((key) => {
-      list.push(this.taskList[key])
-    })
+    Object.keys(this.taskList).forEach((key) => list.push(this.taskList[key]))
     return list
   }
 
@@ -25,15 +23,36 @@ class TaskService {
     this.taskList[task.id] = task
   }
 
+  getTaskStatus (task) {
+    return task.completedIn ? 'Completed'.green : 'Incomplete'.red
+  }
+
+  printTask (task, index) {
+    const idx = `${index + 1}`
+    const status = this.getTaskStatus(task)
+    return `${idx.green} | ${task.description} :: ${status}`
+  }
+
   showAllTasks () {
     console.log()
-    this.taskListArray.forEach((task, i) => {
-      const idx = `${i + 1}`
-      let status = ''
-      task.completedIn
-        ? (status = 'Completed'.green)
-        : (status = 'Incomplete'.red)
-      console.log(`${idx.green} ${task.description} :: ${status}`)
+    this.taskListArray.forEach((task, i) => console.log(this.printTask(task, i)))
+  }
+
+  showTasksByStatus (areTaskCompleted = true) {
+    console.log()
+    let counter = 0
+    this.taskListArray.forEach((task) => {
+      if (areTaskCompleted) {
+        if (task.completedIn) {
+          counter += 1
+          console.log(`${this.printTask(task, counter)}\n  | Completed in :: ${task.completedIn}`)
+        }
+      } else {
+        if (!task.completedIn) {
+          counter += 1
+          console.log(this.printTask(task, counter))
+        }
+      }
     })
   }
 }

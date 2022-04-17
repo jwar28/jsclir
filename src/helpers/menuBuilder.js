@@ -13,6 +13,15 @@ const menuActions = async (option, taskList) => {
     case '2':
       taskList.showAllTasks()
       break
+
+    case '3':
+      taskList.showTasksByStatus(true)
+      break
+
+    // eslint-disable-next-line no-duplicate-case
+    case '4':
+      taskList.showTasksByStatus(false)
+      break
   }
 }
 
