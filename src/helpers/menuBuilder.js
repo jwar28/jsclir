@@ -1,26 +1,65 @@
-const { showMenu, pauseMenu, readUserInput } = require('./menuUtils')
+/* eslint-disable no-case-declarations */
+const {
+  showMenu,
+  pauseMenu,
+  readUserInput,
+  listTasksToDelete,
+  confirm
+} = require('./menuUtils')
 const { saveIntoFile, getTasksInFile } = require('./dataUtils')
 const TaskService = require('../services/taskService')
+
+const createTask = async (taskList) => {
+  const desc = await readUserInput('Description:')
+  taskList.createTask(desc)
+}
+
+const confirmDeleteChoice = async () => {
+  const confirmChoice = await confirm(
+    'Are you sure you want to delete this task?'
+  )
+  return confirmChoice
+}
+
+const deleteTask = async (taskList) => {
+  const id = await listTasksToDelete(taskList.taskListArray)
+  if (id !== '0') {
+    const confirmChoice = await confirmDeleteChoice()
+    if (confirmChoice) {
+      taskList.deleteTask(id)
+      console.log('\nTask deleted successfully'.green)
+    }
+  }
+}
+
+const showAllTasks = async (taskList) => taskList.showAllTasks()
+
+const showTasksByStatus = async (taskList, isCompleted) =>
+  taskList.showTasksByStatus(isCompleted)
 
 const menuActions = async (option, taskList) => {
   switch (option) {
     case '1':
-      // eslint-disable-next-line no-case-declarations
-      const desc = await readUserInput('Description:')
-      taskList.createTask(desc)
+      await createTask(taskList)
       break
 
     case '2':
-      taskList.showAllTasks()
+      await showAllTasks(taskList)
       break
 
     case '3':
-      taskList.showTasksByStatus(true)
+      await showTasksByStatus(taskList, true)
       break
 
-    // eslint-disable-next-line no-duplicate-case
     case '4':
-      taskList.showTasksByStatus(false)
+      await showTasksByStatus(taskList, false)
+      break
+
+    case '5':
+      break
+
+    case '6':
+      await deleteTask(taskList)
       break
   }
 }

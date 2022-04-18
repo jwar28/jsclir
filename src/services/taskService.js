@@ -12,6 +12,10 @@ class TaskService {
     return list
   }
 
+  deleteTask (id = '') {
+    if (this.taskList[id]) delete this.taskList[id]
+  }
+
   getTasksFromArray (tasks = []) {
     tasks.forEach((task) => {
       this.taskList[task.id] = task
@@ -35,23 +39,24 @@ class TaskService {
 
   showAllTasks () {
     console.log()
-    this.taskListArray.forEach((task, i) => console.log(this.printTask(task, i)))
+    this.taskListArray.forEach((task, i) =>
+      console.log(this.printTask(task, i))
+    )
   }
 
   showTasksByStatus (areTaskCompleted = true) {
     console.log()
-    let counter = 0
-    this.taskListArray.forEach((task) => {
+    this.taskListArray.forEach((task, i) => {
       if (areTaskCompleted) {
         if (task.completedIn) {
-          counter += 1
-          console.log(`${this.printTask(task, counter)}\n  | Completed in :: ${task.completedIn}`)
+          console.log(
+            `${this.printTask(task, i)}\n  | Completed in :: ${
+              task.completedIn
+            }`
+          )
         }
       } else {
-        if (!task.completedIn) {
-          counter += 1
-          console.log(this.printTask(task, counter))
-        }
+        if (!task.completedIn) console.log(this.printTask(task, i))
       }
     })
   }
