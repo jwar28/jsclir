@@ -4,7 +4,8 @@ const {
   pauseMenu,
   readUserInput,
   listTasksToDelete,
-  confirm
+  confirm,
+  markTaskAsFinished
 } = require('./menuUtils')
 const { saveIntoFile, getTasksInFile } = require('./dataUtils')
 const TaskService = require('../services/taskService')
@@ -15,10 +16,7 @@ const createTask = async (taskList) => {
 }
 
 const confirmDeleteChoice = async () => {
-  const confirmChoice = await confirm(
-    'Are you sure you want to delete this task?'
-  )
-  return confirmChoice
+  return await confirm('Are you sure you want to delete this task?')
 }
 
 const deleteTask = async (taskList) => {
@@ -34,8 +32,14 @@ const deleteTask = async (taskList) => {
 
 const showAllTasks = async (taskList) => taskList.showAllTasks()
 
-const showTasksByStatus = async (taskList, isCompleted) =>
-  taskList.showTasksByStatus(isCompleted)
+const showTasksByStatus = async (taskList, isCompleted) => {
+  return taskList.showTasksByStatus(isCompleted)
+}
+
+const checkTaskAsFinished = async (taskList) => {
+  const idsList = await markTaskAsFinished(taskList.taskListArray)
+  return taskList.markTaskAsCompleted(idsList)
+}
 
 const menuActions = async (option, taskList) => {
   switch (option) {
@@ -56,6 +60,7 @@ const menuActions = async (option, taskList) => {
       break
 
     case '5':
+      await checkTaskAsFinished(taskList)
       break
 
     case '6':

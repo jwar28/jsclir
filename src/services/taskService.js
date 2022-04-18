@@ -51,12 +51,27 @@ class TaskService {
         if (task.completedIn) {
           console.log(
             `${this.printTask(task, i)}\n  | Completed in :: ${
-              task.completedIn
+              task.completedIn.green
             }`
           )
         }
       } else {
         if (!task.completedIn) console.log(this.printTask(task, i))
+      }
+    })
+  }
+
+  markTaskAsCompleted (taskListIds = []) {
+    taskListIds.forEach((id) => {
+      const task = this.taskList[id]
+      if (!task.completedIn) {
+        task.completedIn = new Date().toISOString()
+      }
+    })
+
+    this.taskListArray.forEach((task) => {
+      if (!taskListIds.includes(task.id)) {
+        this.taskList[task.id].completedIn = null
       }
     })
   }

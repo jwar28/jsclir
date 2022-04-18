@@ -1,11 +1,5 @@
 require('colors')
 
-const menuHeader = () => {
-  console.log('\n================================'.green)
-  console.log('\tSelect an option')
-  console.log('================================\n'.green)
-}
-
 const menuQuestions = [
   {
     type: 'list',
@@ -52,36 +46,14 @@ const pauseMenuQuestion = [
   }
 ]
 
-const listTaskToDelete = async (taskList = []) => {
-  const choices = taskList.map((task, i) => {
-    const index = `${i + 1}`.green
-    return {
-      value: task.id,
-      name: `${index}. ${task.description}`
-    }
-  })
-  return choices
-}
-
-const deleteTaskQuestions = async (choices) => {
-  choices.unshift({
-    value: '0',
-    name: `${'0.'.green} cancel`
-  })
-  const question = [
-    {
-      type: 'list',
-      name: 'id',
-      message: 'What task do you want to delete?',
-      choices
-    }
-  ]
-
-  return question
+const menuHeader = () => {
+  console.log('\n================================'.green)
+  console.log('\tSelect an option')
+  console.log('================================\n'.green)
 }
 
 const readUserInputQuestion = async (message) => {
-  const question = [
+  return [
     {
       type: 'input',
       name: 'description',
@@ -94,20 +66,44 @@ const readUserInputQuestion = async (message) => {
       }
     }
   ]
-
-  return question
 }
 
 const confirmQuestion = async (message) => {
   return [{ type: 'confirm', name: 'confirmChoice', message }]
 }
 
+const deleteTaskQuestion = async (choices) => {
+  choices.unshift({
+    value: '0',
+    name: `${'0.'.green} cancel`
+  })
+  return [
+    {
+      type: 'list',
+      name: 'id',
+      message: 'What task do you want to delete?',
+      choices
+    }
+  ]
+}
+
+const checkTaskQuestion = async (choices) => {
+  return [
+    {
+      type: 'checkbox',
+      name: 'selectedIds',
+      message: 'Select a task',
+      choices
+    }
+  ]
+}
+
 module.exports = {
   menuQuestions,
   menuHeader,
   pauseMenuQuestion,
-  listTaskToDelete,
-  deleteTaskQuestions,
+  deleteTaskQuestion,
   readUserInputQuestion,
-  confirmQuestion
+  confirmQuestion,
+  checkTaskQuestion
 }
