@@ -1,7 +1,7 @@
 # Jsclir
 Cli task app developed with node js
 
-## Building packages
+## Installing dependencies
 Run `npm install` to install all the dependencies of the project.
 
 ## Starting app
