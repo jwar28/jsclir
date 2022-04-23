@@ -1,19 +1,15 @@
-const fs = require('fs')
+import fs from 'fs';
 
-const filePath = './src/data/data.json'
+const filePath = './src/data/data.json';
 
-const saveFile = (data) => fs.writeFileSync(filePath, JSON.stringify(data))
+export const saveFile = (data) =>
+  fs.writeFileSync(filePath, JSON.stringify(data));
 
-const readFile = () => {
+export const readFile = () => {
   if (!fs.existsSync(filePath)) {
-    return null
+    return null;
   }
 
-  const data = fs.readFileSync(filePath, { encoding: 'utf-8' })
-  return JSON.parse(data)
-}
-
-module.exports = {
-  saveFile,
-  readFile
-}
+  const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
+  return JSON.parse(data);
+};

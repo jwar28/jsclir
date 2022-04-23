@@ -1,25 +1,28 @@
 {
   "name": "jsclir",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "errors": "standard",
-    "fix": "standard --fix"
+    "lint": "eslint --ignore-path .gitignore . --ext .js",
+    "lint:fix": "eslint --ignore-path .gitignore . --ext .js --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "standard": "^16.0.4"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
-  },
   "dependencies": {
     "colors": "^1.4.0",
     "inquirer": "^8.2.2",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier": "^2.6.2"
   }
 }

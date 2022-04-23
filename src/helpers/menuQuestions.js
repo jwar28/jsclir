@@ -1,6 +1,6 @@
-require('colors')
+import 'colors';
 
-const menuQuestions = [
+export const menuQuestions = [
   {
     type: 'list',
     name: 'option',
@@ -8,102 +8,92 @@ const menuQuestions = [
     choices: [
       {
         value: '1',
-        name: '1. Create task'
+        name: '1. Create task',
       },
       {
         value: '2',
-        name: '2. View all tasks'
+        name: '2. View all tasks',
       },
       {
         value: '3',
-        name: '3. View completed tasks'
+        name: '3. View completed tasks',
       },
       {
         value: '4',
-        name: '4. View unfinished tasks'
+        name: '4. View unfinished tasks',
       },
       {
         value: '5',
-        name: '5. Mark task as finished'
+        name: '5. Mark task as finished',
       },
       {
         value: '6',
-        name: '6. Delete task'
+        name: '6. Delete task',
       },
       {
         value: '0',
-        name: '0. Finish'
-      }
-    ]
-  }
-]
+        name: '0. Finish',
+      },
+    ],
+  },
+];
 
-const pauseMenuQuestion = [
+export const pauseMenuQuestion = [
   {
     type: 'input',
     name: 'pause',
-    message: `\nPress ${'enter'.green} to continue\n`
-  }
-]
+    message: `\nPress ${'enter'.green} to continue\n`,
+  },
+];
 
-const menuHeader = () => {
-  console.log('\n================================'.green)
-  console.log('\tSelect an option')
-  console.log('================================\n'.green)
-}
+export const menuHeader = () => {
+  console.log('\n================================'.green);
+  console.log('\tSelect an option');
+  console.log('================================\n'.green);
+};
 
-const readUserInputQuestion = async (message) => {
+export const readUserInputQuestion = async (message) => {
   return [
     {
       type: 'input',
       name: 'description',
       message,
-      validate (value) {
+      validate(value) {
         if (value.length === 0) {
-          return 'Please enter a value'
+          return 'Please enter a value';
         }
-        return true
-      }
-    }
-  ]
-}
+        return true;
+      },
+    },
+  ];
+};
 
-const confirmQuestion = async (message) => {
-  return [{ type: 'confirm', name: 'confirmChoice', message }]
-}
+export const confirmQuestion = async (message) => {
+  return [{ type: 'confirm', name: 'confirmChoice', message }];
+};
 
-const deleteTaskQuestion = async (choices) => {
+export const deleteTaskQuestion = async (choices) => {
   choices.unshift({
     value: '0',
-    name: `${'0.'.green} cancel`
-  })
+    name: `${'0.'.green} cancel`,
+  });
   return [
     {
       type: 'list',
       name: 'id',
       message: 'What task do you want to delete?',
-      choices
-    }
-  ]
-}
+      choices,
+    },
+  ];
+};
 
-const checkTaskQuestion = async (choices) => {
+export const checkTaskQuestion = async (choices) => {
   return [
     {
       type: 'checkbox',
       name: 'selectedIds',
       message: 'Select a task',
-      choices
-    }
-  ]
-}
-
-module.exports = {
-  menuQuestions,
-  menuHeader,
-  pauseMenuQuestion,
-  deleteTaskQuestion,
-  readUserInputQuestion,
-  confirmQuestion,
-  checkTaskQuestion
-}
+      choices,
+    },
+  ];
+};
