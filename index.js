@@ -1,5 +1,5 @@
-const { startMenu } = require('./src/helpers/menuBuilder')
+import { startMenu } from './src/helpers/menuBuilder.js';
 
-const main = async () => await startMenu()
+const main = async () => await startMenu();
 
-main()
+main();

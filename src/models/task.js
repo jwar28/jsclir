@@ -1,11 +1,9 @@
-const { v4: uuidv4 } = require('uuid')
+import { v4 as uuidv4 } from 'uuid';
 
-class Task {
-  constructor (description) {
-    this.id = uuidv4()
-    this.description = description
-    this.completedIn = null
+export class Task {
+  constructor(description) {
+    this.id = uuidv4();
+    this.description = description;
+    this.completedIn = null;
   }
 }
-
-module.exports = Task

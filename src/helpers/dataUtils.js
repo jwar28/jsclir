@@ -1,15 +1,10 @@
-const { saveFile, readFile } = require('../data/fileManager')
+import { readFile, saveFile } from '../data/fileManager.js';
 
-const saveIntoFile = (taskListArray) => saveFile(taskListArray)
+export const saveIntoFile = (taskListArray) => saveFile(taskListArray);
 
-const getTasksInFile = (tasksFile) => {
-  const tasksInFile = readFile()
+export const getTasksInFile = (tasksFile) => {
+  const tasksInFile = readFile();
 
-  if (tasksInFile) tasksFile.getTasksFromArray(tasksInFile)
-  return tasksInFile
-}
-
-module.exports = {
-  saveIntoFile,
-  getTasksInFile
-}
+  if (tasksInFile) tasksFile.getTasksFromArray(tasksInFile);
+  return tasksInFile;
+};
